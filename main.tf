@@ -1,17 +1,15 @@
 module aws_wordpress {
-    source              = "./modules/latest"
+    source              = "./modules/yoobee_avengers"
     database_name           = "wordpress_db"   // database name
     database_user           = "wordpress_user" //database username
     // Password here will be used to create master db user.It should be chnaged later
     database_password = "PassWord4-user" //password for user database
-    access_key_aws  = "YYYY" #Avengers access
-    secret_key_aws  = "XXXX" #Avengers access
+    access_key_aws  = "XXX" #Avengers access
+    secret_key_aws  = "YYY" #Avengers access
     region                  = "us-east-1" //N.Virginia region
     // avaibility zone and their CIDR
     AZ1          = "us-east-1a" // first AZ
     AZ2          = "us-east-1b"  // second AZ
-    AZ3          = "us-east-1c"  // back up
-    AZ4          = "us-east-1d"  // back up
     VPC_cidr     = "10.0.0.0/16"     // VPC CIDR
     subnet1_cidr = "10.0.1.0/24"     // Public Subnet for EC2
     subnet2_cidr = "10.0.2.0/24"     //Public Subnet for EC2

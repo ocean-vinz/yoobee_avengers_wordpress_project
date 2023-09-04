@@ -4,8 +4,6 @@ variable "database_user" {}
 variable "region" {}
 variable "AZ1" {}
 variable "AZ2" {}
-variable "AZ3" {}
-variable "AZ4" {}
 variable "VPC_cidr" {}
 variable "subnet1_cidr" {}
 variable "subnet2_cidr" {}

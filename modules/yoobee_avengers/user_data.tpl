@@ -51,7 +51,7 @@ cp wp-config-sample.php wp-config.php
 sed -i "s/database_name_here/$db_name/g" wp-config.php
 sed -i "s/username_here/$db_username/g" wp-config.php
 sed -i "s/password_here/$db_user_password/g" wp-config.php
-sed -i "s/localhost/$db_RDS/g"
+sed -i "s/localhost/$db_RDS/g" wp-config.php
 cat <<EOF >>/var/www/html/wp-config.php
 define( 'FS_METHOD', 'direct' );
 define('WP_MEMORY_LIMIT', '128M');
@@ -65,8 +65,6 @@ chmod -R 774 /var/www/html
 #  enable .htaccess files in Apache config using sed command
 sed -i '/<Directory "\/var\/www\/html">/,/<\/Directory>/ s/AllowOverride None/AllowOverride all/' /etc/httpd/conf/httpd.conf
 
-
-wp core install --url="http://localhost" --title="YooBee Avengers Project" --admin_user=admin --admin_password=strongpassword --admin_email=info@example.com
 
 #Make apache  autostart and restart apache
 systemctl enable  httpd.service

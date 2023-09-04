@@ -147,7 +147,7 @@ resource "aws_db_subnet_group" "RDS_subnet_grp" {
 resource "aws_db_instance" "wordpressdb" {
   allocated_storage      = 10
   engine                 = "mysql"
-  engine_version         = "5.7"
+  engine_version         = "8.0"
   instance_class         = var.instance_class
   db_subnet_group_name   = aws_db_subnet_group.RDS_subnet_grp.id
   vpc_security_group_ids = ["${aws_security_group.RDS_allow_rule.id}"]
