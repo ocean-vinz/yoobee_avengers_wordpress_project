@@ -14,5 +14,5 @@ variable "instance_class" {}
 variable "PUBLIC_KEY_PATH" {}
 variable "PRIV_KEY_PATH" {}
 variable "root_volume_size" {}
-variable "access_key_aws" {}
-variable "secret_key_aws" {}
+variable "cred_file" {}
+

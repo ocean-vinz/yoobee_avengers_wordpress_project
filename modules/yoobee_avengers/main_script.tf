@@ -2,8 +2,7 @@ provider "aws" {
 
   region                  = var.region
   profile                  = "default"
-  access_key = var.access_key_aws
-  secret_key= var.secret_key_aws
+  shared_credentials_files = var.cred_file
 }
 
 

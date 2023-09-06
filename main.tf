@@ -4,8 +4,7 @@ module aws_wordpress {
     database_user           = "wordpress_user" //database username
     // Password here will be used to create master db user.It should be chnaged later
     database_password = "PassWord4-user" //password for user database
-    access_key_aws  = "XXX" #Avengers access
-    secret_key_aws  = "YYY" #Avengers access
+    cred_file = ["C:\\Users\\irvin\\.aws\\credentials", "/home/ec2-user/.aws/credentials"] #for windows and amazon linux
     region                  = "us-east-1" //N.Virginia region
     // avaibility zone and their CIDR
     AZ1          = "us-east-1a" // first AZ
@@ -21,6 +20,3 @@ module aws_wordpress {
     instance_class   = "db.t2.micro" //type of RDS Instance
     root_volume_size = 30 // in GB
 }
-
-
-
