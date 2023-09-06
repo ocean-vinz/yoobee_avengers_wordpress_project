@@ -23,6 +23,10 @@ module "vpc" {
   cidr = var.VPC_cidr
   azs                  = [var.AZ1, var.AZ2]
   public_subnets       = [var.subnet1_cidr, var.subnet2_cidr]
+  private_subnets      = [var.subnet3_cidr, var.subnet4_cidr]
+  enable_nat_gateway = true 
+  single_nat_gateway = true # If single_nat_gateway = true, then all private subnets will route their Internet traffic through this single NAT gateway. The NAT gateway will be placed in the first public subnet in your public_subnets block.
+  one_nat_gateway_per_az = false
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
@@ -32,29 +36,29 @@ module "vpc" {
 }
 
 
-# Create Private subnet for RDS (For the first AZ)
-resource "aws_subnet" "avengers-subnet-private-1" {
-  vpc_id                  = module.vpc.vpc_id
-  cidr_block              = var.subnet3_cidr
-  map_public_ip_on_launch = "false" //it makes private subnet
-  availability_zone       = var.AZ1
-  tags = {
-    Terraform = "true"
-    Name = "avengers-2-private-subnets"
-  }
-}
+# # Create Private subnet for RDS (For the first AZ)
+# resource "aws_subnet" "avengers-subnet-private-1" {
+#   vpc_id                  = module.vpc.vpc_id
+#   cidr_block              = var.subnet3_cidr
+#   map_public_ip_on_launch = "false" //it makes private subnet
+#   availability_zone       = var.AZ1
+#   tags = {
+#     Terraform = "true"
+#     Name = "avengers-2-private-subnets"
+#   }
+# }
 
-# Create second Private subnet for RDS (For the second AZ)
-resource "aws_subnet" "avengers-subnet-private-2" {
-  vpc_id                  = module.vpc.vpc_id
-  cidr_block              = var.subnet4_cidr
-  map_public_ip_on_launch = "false" //it makes private subnet
-  availability_zone       = var.AZ2
-  tags = {
-    Terraform = "true"
-    Name = "avengers-3-private-subnets"
-  }
-}
+# # Create second Private subnet for RDS (For the second AZ)
+# resource "aws_subnet" "avengers-subnet-private-2" {
+#   vpc_id                  = module.vpc.vpc_id
+#   cidr_block              = var.subnet4_cidr
+#   map_public_ip_on_launch = "false" //it makes private subnet
+#   availability_zone       = var.AZ2
+#   tags = {
+#     Terraform = "true"
+#     Name = "avengers-3-private-subnets"
+#   }
+# }
 
 
 //security group for EC2
@@ -135,7 +139,7 @@ resource "aws_security_group" "RDS_allow_rule" {
 
 # Create RDS Subnet group
 resource "aws_db_subnet_group" "RDS_subnet_grp" {
-  subnet_ids = ["${aws_subnet.avengers-subnet-private-1.id}", "${aws_subnet.avengers-subnet-private-2.id}"]
+  subnet_ids = module.vpc.private_subnets
   tags = {
     Name = "avengers-7-rds-subnet-group"
   }
