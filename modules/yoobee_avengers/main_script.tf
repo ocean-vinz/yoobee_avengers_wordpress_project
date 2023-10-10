@@ -266,6 +266,21 @@ resource "aws_lb_listener" "yoobee" {
   }
 }
 
+resource "aws_lb_listener" "yoobee_https" {
+  load_balancer_arn = aws_lb.yoobee.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn   = "arn:aws:acm:us-east-1:092166466870:certificate/14a5367f-e734-476d-bbb2-0f51a20671e4" 
+   tags = {
+    Name = "avengers-11-load-balancer-listener"
+  }
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.yoobee_aws_lb_target.arn
+  }
+}
+
 # Creating the load balancer
 
 resource "aws_lb_target_group" "yoobee_aws_lb_target" {
