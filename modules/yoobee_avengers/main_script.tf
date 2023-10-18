@@ -252,19 +252,19 @@ resource "aws_lb" "yoobee" {
 
 # Creating the load balancer 
 
-resource "aws_lb_listener" "yoobee" {
-  load_balancer_arn = aws_lb.yoobee.arn
-  port              = "80"
-  protocol          = "HTTP"
-  depends_on = [aws_db_instance.wordpressdb]
-  tags = {
-    Name = "avengers-11-load-balancer-listener"
-  }
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.yoobee_aws_lb_target.arn
-  }
-}
+# resource "aws_lb_listener" "yoobee" {
+#   load_balancer_arn = aws_lb.yoobee.arn
+#   port              = "80"
+#   protocol          = "HTTP"
+#   depends_on = [aws_db_instance.wordpressdb]
+#   tags = {
+#     Name = "avengers-11-load-balancer-listener"
+#   }
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.yoobee_aws_lb_target.arn
+#   }
+# }
 
 resource "aws_lb_listener" "yoobee_https" {
   load_balancer_arn = aws_lb.yoobee.arn
