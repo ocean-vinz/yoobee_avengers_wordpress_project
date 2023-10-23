@@ -16,7 +16,7 @@ module aws_wordpress {
     subnet4_cidr = "10.0.4.0/24"     // Private Subnet for RDS
     PUBLIC_KEY_PATH  = "./yoobee-key.pub" // key name for ec2, make sure it is created before terrafomr apply
     PRIV_KEY_PATH    = "./yoobee-key"
-    instance_type    = "t2.micro"    //type of instance
+    instance_type    = "t2.small"    //type of instance
     instance_class   = "db.t2.micro" //type of RDS Instance
     root_volume_size = 30 // in GB
 }
