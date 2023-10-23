@@ -218,7 +218,7 @@ resource "aws_autoscaling_group" "mygroup" {
   name                      = "autoscalegroup"   # Specifying the name of the autoscaling group
   max_size                  = 3
   min_size                  = 2
-  health_check_grace_period = 30 # Grace period is the time after which AWS EC2 instance comes into service before checking health.
+  health_check_grace_period = 300 # Grace period is the time after which AWS EC2 instance comes into service before checking health.
   health_check_type         = "ELB" # The Autoscaling will happen based on health of AWS EC2 instance defined in AWS CLoudwatch Alarm 
   force_delete              = true # force_delete deletes the Auto Scaling Group without waiting for all instances in the pool to terminate
   termination_policies      = ["OldestInstance"] # Defining the termination policy where the oldest instance will be replaced first 
